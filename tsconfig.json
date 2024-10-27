@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "types": ["node", "jest"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "inlineSourceMap": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "noUnusedLocals": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node",
+    "module": "ESNext",
+    "outDir": "dist",
+    "lib": ["es2022"],
+    "rootDir": "src",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "*.tsbuildinfo"],
+  "tsc-alias": {
+    "resolveFullPaths": true
+  }
+}
