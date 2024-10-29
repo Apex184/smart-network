@@ -3,7 +3,8 @@ export enum ResponseMessage {
   Success = "Created successfully",
   VerificationEmailSent = "Verification email sent, please check your mailbox",
   EmailVerified = "Your email has been verified",
-  OtpEmailSent = 'An OTP has been sent to your email inbox'
+  OtpEmailSent = 'An OTP has been sent to your email inbox',
+  AdminSignupSuccess = "AdminSignupSuccess"
 }
 
 

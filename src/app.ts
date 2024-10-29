@@ -12,7 +12,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-// import { appRoutes } from './app/routes';
+import { appRoutes } from './app/routes';
 import { NotFoundError } from './lib/errors';
 import { errorHandler, httpLogger } from './lib/middlewares';
 const __filename = fileURLToPath(import.meta.url);
@@ -23,9 +23,7 @@ export const app = express();
 Sentry.init({
     dsn: process.env.SENTRY_DSN,
     integrations: [
-        // enable HTTP calls tracing
         new Sentry.Integrations.Http({ tracing: true }),
-        // enable Express.js middleware tracing
         new Sentry.Integrations.Express({ app }),
         nodeProfilingIntegration(),
     ],
@@ -55,7 +53,8 @@ app.get('/', (_req, res) => {
     res.send('Welcome to Roodi Technology Limited! ✍️');
 });
 
-// app.use(appRoutes);
+app.use('/v1', appRoutes);
+
 
 app.use((req, _res) => {
     throw new NotFoundError(`Route ${req.method} ${req.url}`);

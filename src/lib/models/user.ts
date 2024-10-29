@@ -3,13 +3,16 @@ import db from '../database';
 import { generateRandomString } from '../helpers';
 
 export enum UserRole {
-    USER = 'client',
+    USER = 'user',
     ORGANIZER = 'organizer',
     ADMIN = 'admin',
     CLIENT = 'client',
 }
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+    createAdmin(arg0: {}, arg1: { transaction: import("sequelize").Transaction; }) {
+        throw new Error('Method not implemented.');
+    }
     declare id: CreationOptional<number>;
     declare publicId: CreationOptional<string>;
     declare email: string;
@@ -33,6 +36,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
         User: HasOne<User>;
 
     };
+    admin: any;
 }
 
 User.init(
@@ -106,7 +110,8 @@ User.init(
             unique: true,
         },
         createdAt: '',
-        updatedAt: ''
+        updatedAt: '',
+        admin: ''
     },
     {
         sequelize: db,
