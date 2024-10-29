@@ -11,7 +11,8 @@ import favicon from 'serve-favicon';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-
+import { swagger, swaggerSetup } from './lib/swagger';
+import { rateLimiterMiddleware } from './lib/rate-limiter';
 import { appRoutes } from './app/routes';
 import { NotFoundError } from './lib/errors';
 import { errorHandler, httpLogger } from './lib/middlewares';
@@ -41,6 +42,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compression());
+app.use('/api-docs', swagger);
+app.get('/api-docs', swaggerSetup);
+app.use(rateLimiterMiddleware);
 app.use(httpLogger);
 app.use(favicon(path.join(__dirname, '../public', 'favicon.ico')));
 
@@ -50,7 +54,7 @@ app.get('/ping', (_req, res) => {
 });
 
 app.get('/', (_req, res) => {
-    res.send('Welcome to Roodi Technology Limited! ✍️');
+    res.send('Connects with fun ✍️');
 });
 
 app.use('/v1', appRoutes);

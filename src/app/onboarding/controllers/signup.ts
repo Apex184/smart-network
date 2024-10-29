@@ -17,6 +17,7 @@ export const signUpController: RequestHandler<any, any, SignUpSchema> = async (r
     logger.info(`User not found`, user)
     const isNewUser = !user || !user?.emailVerified;
     logger.info(isNewUser)
+    logger.info(role)
     const hashedPassword = await hash(password);
     logger.info(hashedPassword);
     return;

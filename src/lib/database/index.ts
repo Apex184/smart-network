@@ -1,5 +1,5 @@
 import { Options, Sequelize } from 'sequelize';
-
+import { logger } from '@/lib'
 import { env } from '@/lib/config';
 
 const config = {
@@ -20,4 +20,15 @@ const config = {
 
 
 export const db = new Sequelize(env.DATABASE_URL, config);
+
+
+(async () => {
+  try {
+    await db.authenticate();
+    logger.info(`[DATABASE STATUS ${new Date()}] - Connected with database.`);
+  } catch (error) {
+    logger.error(`[DATABASE ERROR ${new Date()}] - Unable to connect with the database:`, error);
+  }
+})();
+
 export default db;

@@ -1,17 +1,35 @@
 import 'dotenv/config';
 
-import http from 'node:http';
-
-import app from './app';
+import { Server as HttpServer } from 'node:http';
+import { Server as SocketIOServer } from 'socket.io';
+import { app } from './app';
 import { logger } from './lib';
 import { env } from './lib/config';
 
-const server = http.createServer(app);
+const server = new HttpServer(app);
 
-server.listen(env.PORT);
+const io = new SocketIOServer(server, {
+    cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+    },
+});
 
-server.on('listening', () => {
+server.listen(env.PORT, () => {
     logger.info(`🚀 App started on port ${env.PORT}!`);
+});
+
+io.on('connection', (socket) => {
+    logger.info(`⚡️ User connected: ${socket.id}`);
+
+    socket.on('message', (data) => {
+        logger.info(`📨 Message received: ${data}`);
+        io.emit('message', data);
+    });
+
+    socket.on('disconnect', () => {
+        logger.info(`⚡️ User disconnected: ${socket.id}`);
+    });
 });
 
 function shutdown(isFatal?: boolean) {
@@ -20,11 +38,6 @@ function shutdown(isFatal?: boolean) {
         isFatal ? process.exit(1) : process.exit(0);
     });
 }
-
-server.on('error', (error) => {
-    logger.error(error, '❌ Server error');
-    shutdown(true);
-});
 
 process.on('unhandledRejection', (error) => {
     logger.fatal(error, '❌ Unhandled promise rejection');

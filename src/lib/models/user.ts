@@ -10,9 +10,9 @@ export enum UserRole {
 }
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-    createAdmin(arg0: {}, arg1: { transaction: import("sequelize").Transaction; }) {
-        throw new Error('Method not implemented.');
-    }
+    // createAdmin(arg0: {}, arg1: { transaction: import("sequelize").Transaction; }) {
+    //     throw new Error('Method not implemented.');
+    // }
     declare id: CreationOptional<number>;
     declare publicId: CreationOptional<string>;
     declare email: string;
@@ -36,7 +36,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
         User: HasOne<User>;
 
     };
-    admin: any;
+
 }
 
 User.init(
@@ -111,7 +111,7 @@ User.init(
         },
         createdAt: '',
         updatedAt: '',
-        admin: ''
+
     },
     {
         sequelize: db,
