@@ -47,22 +47,22 @@ module.exports = {
         eventStatus: {
           type: Sequelize.ENUM('upcoming', 'ongoing', 'completed', 'canceled'),
           allowNull: false,
-          defaultValue: 'upcoming', // default status
+          defaultValue: 'upcoming',
         },
         eventVisibility: {
           type: Sequelize.ENUM('public', 'private'),
           allowNull: false,
-          defaultValue: 'public', // default visibility
+          defaultValue: 'public',
         },
         organizerId: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {
-            model: 'users', // Assuming you have a 'users' table
+            model: 'users',
             key: 'id',
           },
           onUpdate: 'CASCADE',
-          onDelete: 'SET NULL', // Change to 'SET NULL' or 'RESTRICT' as needed
+          onDelete: 'SET NULL',
         },
         createdAt: {
           type: Sequelize.DATE,
@@ -76,7 +76,7 @@ module.exports = {
       {
         uniqueKeys: {
           unique_event: {
-            fields: ['eventId', 'eventCode'], // Example of unique constraint
+            fields: ['eventId', 'eventCode'],
           },
         },
       },

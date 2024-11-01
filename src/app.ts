@@ -13,6 +13,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { swagger, swaggerSetup } from './lib/swagger';
 import { rateLimiterMiddleware } from './lib/rate-limiter';
+import { googleCallback } from './app/onboarding/controllers'
 import { appRoutes } from './app/routes';
 import { NotFoundError } from './lib/errors';
 import { errorHandler, httpLogger } from './lib/middlewares';
@@ -56,6 +57,7 @@ app.get('/ping', (_req, res) => {
 app.get('/', (_req, res) => {
     res.send('Connects with fun ✍️');
 });
+app.get('/auth/google/callback', googleCallback);
 
 app.use('/v1', appRoutes);
 

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-
+import { googleAuthUrl } from './controllers';
 import { authenticate, emailVerified, validate } from '@/lib/middlewares';
 
 import {
@@ -13,19 +13,7 @@ import {
 // const checkEmailVerification = [authenticate, emailVerified];
 
 const router = Router();
-
+router.get('/google/url', googleAuthUrl);
 router.post('/', validate(SignUpSchema), signUpController);
-
-// router.use(checkEmailVerification);
-// router.get('/upload', getUploadUrlController);
-// router.post('/profiles', validate(CreateProfileSchema), createProfileController);
-// router.post('/profiles/teachers', validate(CreateTeacherProfileSchema), createTeacherProfileController);
-// router.post('/profiles/:studentId/parents', validate(ParentProfileSchema), parentProfileController);
-// router.post(
-//     '/profiles/:studentId/parents/contacts',
-//     validate(ParentUpdateContactSchema),
-//     parentUpdateContactController,
-// );
-// router.post('/profiles/:studentId/parents/children', validate(StudentUpdateSchema), parentUpdateChildDetailsController);
 
 export const onboardingRoutes = router;

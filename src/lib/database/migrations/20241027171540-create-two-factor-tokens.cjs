@@ -18,11 +18,11 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
           references: {
-            model: 'users', // Adjust this if your table is named differently
+            model: 'users',
             key: 'email',
           },
           onUpdate: 'CASCADE',
-          onDelete: 'CASCADE', // Adjust based on your requirements
+          onDelete: 'CASCADE',
         },
         token: {
           type: Sequelize.STRING,
@@ -35,24 +35,23 @@ module.exports = {
         createdAt: {
           type: Sequelize.DATE,
           allowNull: false,
-          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'), // Automatically set to the current timestamp
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         },
         updatedAt: {
           type: Sequelize.DATE,
           allowNull: false,
-          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'), // Set default value without update clause
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         },
       },
       {
         uniqueKeys: {
           unique_two_factor_token: {
-            fields: ['email'], // Ensure a user can have only one two-factor token at a time
+            fields: ['email'],
           },
         },
       },
     );
 
-    // Adding a trigger to automatically update the updatedAt field
     await queryInterface.sequelize.query(`
       CREATE FUNCTION update_updated_at_column()
       RETURNS TRIGGER AS $$

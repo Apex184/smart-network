@@ -10,14 +10,10 @@ export enum UserRole {
 }
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-    // createAdmin(arg0: {}, arg1: { transaction: import("sequelize").Transaction; }) {
-    //     throw new Error('Method not implemented.');
-    // }
     declare id: CreationOptional<number>;
-    declare publicId: CreationOptional<string>;
     declare email: string;
     declare password?: string;
-    declare role: 'user' | 'organizer' | 'admin' | 'client';
+    declare role?: 'user' | 'organizer' | 'admin' | 'client';
     declare fullName?: string;
     declare lastName?: string;
     declare emailVerified?: Date;
@@ -28,13 +24,10 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
     declare adminNote?: string;
     declare provider?: string;
     declare providerId?: string;
-    declare readonly createdAt: Date;
-    declare readonly updatedAt: Date;
-
-
+    // declare readonly createdAt: Date;
+    // declare readonly updatedAt: Date;
     declare static associations: {
         User: HasOne<User>;
-
     };
 
 }
@@ -46,15 +39,9 @@ User.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        publicId: {
-            type: DataTypes.STRING(12),
-            allowNull: false,
-            unique: true,
-            defaultValue: () => generateRandomString(12, { type: 'alphanumericLower' }),
-        },
         email: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
             unique: true,
             validate: {
                 isEmail: true,
@@ -66,23 +53,28 @@ User.init(
         },
         role: {
             type: DataTypes.ENUM('user', 'client', 'organizer', 'admin'),
-            allowNull: false,
-            defaultValue: 'user',
+            allowNull: true,
+            defaultValue: '',
         },
         fullName: {
             type: DataTypes.STRING,
+            allowNull: true,
         },
         lastName: {
             type: DataTypes.STRING,
+            allowNull: true,
         },
         emailVerified: {
             type: DataTypes.DATE,
+            allowNull: true,
         },
         phone: {
             type: DataTypes.STRING,
+            allowNull: true,
         },
         image: {
             type: DataTypes.STRING,
+            allowNull: true,
         },
 
         organizationName: {
@@ -91,6 +83,7 @@ User.init(
         },
         organizationWebsite: {
             type: DataTypes.STRING,
+            allowNull: true,
             validate: {
                 isUrl: true,
             },
@@ -109,8 +102,8 @@ User.init(
             allowNull: true,
             unique: true,
         },
-        createdAt: '',
-        updatedAt: '',
+        // createdAt: Date.now(),
+        // updatedAt: Date.now(),
 
     },
     {

@@ -18,21 +18,21 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {
-            model: 'users', // Adjust this if your table is named differently
+            model: 'users',
             key: 'id',
           },
           onUpdate: 'CASCADE',
-          onDelete: 'CASCADE', // Adjust based on your requirements
+          onDelete: 'CASCADE',
         },
         eventId: {
           type: Sequelize.STRING,
           allowNull: false,
           references: {
-            model: 'events', // Adjust this if your table is named differently
+            model: 'events',
             key: 'eventId',
           },
           onUpdate: 'CASCADE',
-          onDelete: 'CASCADE', // Adjust based on your requirements
+          onDelete: 'CASCADE',
         },
         status: {
           type: Sequelize.ENUM('registered', 'attended', 'cancelled'),
@@ -51,7 +51,7 @@ module.exports = {
       {
         uniqueKeys: {
           unique_event_attendee: {
-            fields: ['userId', 'eventId'], // To ensure a user can register for an event only once
+            fields: ['userId', 'eventId'],
           },
         },
       },

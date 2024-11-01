@@ -12,14 +12,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      publicId: {
-        type: Sequelize.STRING(12),
-        allowNull: false,
-        unique: true,
-      },
       email: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
         unique: true,
       },
       password: {

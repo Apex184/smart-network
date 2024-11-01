@@ -18,11 +18,11 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
           references: {
-            model: 'users', // Adjust this if your table is named differently
+            model: 'users',
             key: 'email',
           },
           onUpdate: 'CASCADE',
-          onDelete: 'CASCADE', // Adjust based on your requirements
+          onDelete: 'CASCADE',
         },
         token: {
           type: Sequelize.STRING,
@@ -44,7 +44,7 @@ module.exports = {
       {
         uniqueKeys: {
           unique_verification_token: {
-            fields: ['email'], // Ensure a user can have only one verification token at a time
+            fields: ['email'],
           },
         },
       },
