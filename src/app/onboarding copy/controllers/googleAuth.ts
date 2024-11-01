@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { OAuth2Client } from 'google-auth-library';
-import { databaseTransaction, logger } from '@/lib';
-import { env } from '@/lib/config';
-import { UserRepository } from '@/lib/repositories';
+import { databaseTransaction } from '../../../lib';
+import { env } from '../../../lib/config';
+import { UserRepository } from '../../../lib/repositories';
 
 
 const client = new OAuth2Client(

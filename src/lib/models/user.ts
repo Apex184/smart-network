@@ -1,4 +1,11 @@
-import { Model, DataTypes, HasOne, CreationOptional, InferAttributes, InferCreationAttributes } from 'sequelize';
+import {
+    Model,
+    DataTypes,
+    HasOne,
+    CreationOptional,
+    InferAttributes,
+    InferCreationAttributes,
+} from 'sequelize';
 import db from '../database';
 import { generateRandomString } from '../helpers';
 
@@ -24,12 +31,9 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
     declare adminNote?: string;
     declare provider?: string;
     declare providerId?: string;
-    // declare readonly createdAt: Date;
-    // declare readonly updatedAt: Date;
     declare static associations: {
         User: HasOne<User>;
     };
-
 }
 
 User.init(
@@ -54,7 +58,7 @@ User.init(
         role: {
             type: DataTypes.ENUM('user', 'client', 'organizer', 'admin'),
             allowNull: true,
-            defaultValue: '',
+
         },
         fullName: {
             type: DataTypes.STRING,
@@ -76,7 +80,6 @@ User.init(
             type: DataTypes.STRING,
             allowNull: true,
         },
-
         organizationName: {
             type: DataTypes.STRING,
             allowNull: true,
@@ -92,7 +95,6 @@ User.init(
             type: DataTypes.TEXT,
             allowNull: true,
         },
-
         provider: {
             type: DataTypes.STRING,
             allowNull: true,
@@ -102,9 +104,6 @@ User.init(
             allowNull: true,
             unique: true,
         },
-        // createdAt: Date.now(),
-        // updatedAt: Date.now(),
-
     },
     {
         sequelize: db,
