@@ -5,22 +5,25 @@ import { sendVerificationEmail } from '@/lib/emails';
 import { User, UserRole } from '@/lib/models';
 import { UserRepository, VerificationTokenRepository } from '@/lib/repositories';
 
-import { SignUpSchema } from '../validations';
+import { UpdateUserRoleSchema } from '../validations';
 
-export const signUpController: RequestHandler<any, any, SignUpSchema> = async (req, res) => {
-    const { email, role, password } = req.body;
+export const updateRoleController: RequestHandler<{ userId: number }, any, UpdateUserRoleSchema, any, { user: User }> = async (req, res) => {
+    const { role, userId } = req.body;
+
+    const user = res.locals.user;
     const userRepo = new UserRepository();
-    const tokenRepo = new VerificationTokenRepository();
-    const token = generateRandomString(6, { type: 'alphanumericUpper' });
 
-    let user = await userRepo.findByEmail(email);
-    logger.info(`User not found`, user)
-    const isNewUser = !user || !user?.emailVerified;
-    logger.info(isNewUser)
-    logger.info(role)
-    const hashedPassword = await hash(password);
-    logger.info(hashedPassword);
-    return;
+    // await userRepo.update(user.id, role);
+
+
+    // let user = await userRepo.findByEmail(email);
+    // logger.info(`User not found`, user)
+    // const isNewUser = !user || !user?.emailVerified;
+    // logger.info(isNewUser)
+    // logger.info(role)
+    // const hashedPassword = await hash(password);
+    // logger.info(hashedPassword);
+    // return;
     // await databaseTransaction(async (t) => {
     //     user ??= await userRepo.create({
     //         email,

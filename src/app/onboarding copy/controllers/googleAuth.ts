@@ -49,7 +49,6 @@ export const googleCallback = async (req: Request, res: Response) => {
 
         await databaseTransaction(async (t) => {
             if (!user) {
-                // Create a new user
                 user = await userRepo.create({
                     providerId: googleId,
                     provider: 'google',

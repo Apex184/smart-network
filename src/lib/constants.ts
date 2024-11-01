@@ -11,6 +11,7 @@ export enum ResponseMessage {
 export enum ErrorMessage {
   InvalidRequestParameters = 'Invalid request parameters',
   InvalidToken = 'Invalid code',
+  TokenExpired = 'Code expired',
   VerificationCodeExpired = 'Verification Code expired',
   EmailNotVerified = 'Please verify your email first',
   UserAlreadyExists = 'Email already in use',
